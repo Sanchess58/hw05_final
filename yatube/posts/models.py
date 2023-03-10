@@ -2,8 +2,6 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import models
 
-from models import CheckConstraint, F, Q
-
 User = get_user_model()
 
 AMOUNT_SYMBOLS = 15
@@ -121,7 +119,12 @@ class Follow(models.Model):
         verbose_name_plural = "Подписчики"
         unique_together = ['user', 'author']
         constraints = [
-            CheckConstraint(check=~Q(user=F('author')), name='not_self_sub'),
+            models.CheckConstraint(
+                check=~models.Q(
+                    user=models.F('author')
+                ),
+                name='not_self_sub'
+            ),
         ]
 
     def __str__(self):
