@@ -1,0 +1,12 @@
+{% with request.resolver_match.view_name as view_name %}
+<li class="nav-item {{margin}}"> 
+    {% if text == '' %}
+       Пользователь: {{user.username}}
+    {% else %}
+      <a class="nav-link {{light}} {% if view_name == path %} active {% endif %}" 
+         href="{% url path %}">
+           {{text}}
+      </a>
+    {% endif %}
+  </li>
+{% endwith %}

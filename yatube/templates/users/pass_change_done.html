@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Пароль изменён{% endblock %}
+{% block content %}
+  {% with card_header='Пароль изменён' card_body='Пароль изменён успешно!' is_url=False %}
+    {% include 'users/includes/card.html' %}
+  {% endwith %} 
+{% endblock %}

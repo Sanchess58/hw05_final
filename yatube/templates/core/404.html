@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}404{% endblock %}
+{% block content %}
+{% load static %}
+  <div class="row">
+    <div class="w-25 mx-auto">
+      <h1>404</h1>
+      <img src="{% static 'img/error_404.svg' %}"  width="300" height="360">
+      <p>Страницы с адресом {{ path }} не существует</p>
+      <a href="{% url 'posts:index' %}">Идите на главную</a>
+    </div>
+</div>
+{% endblock %} 

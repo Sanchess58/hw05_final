@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %} {{ description }} {% endblock title %}
+{% block content %}
+  <div class="container">     
+    <h1>{{ description }}</h1>
+    {% include 'posts/includes/switcher.html'%}
+    {% for post in page_obj %}
+      {% include 'posts/includes/publication.html'%}
+    {% endfor %}
+  {% include 'posts/includes/paginator.html' %}
+  </div>        
+{% endblock content %}
