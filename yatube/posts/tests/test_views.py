@@ -431,14 +431,13 @@ class FollowTest(TestCase):
 
     def test_self_subscription(self):
         """Проверка подписки на самого себя."""
-        with self.assertRaises(IntegrityError):
-            count_followers = Follow.objects.count()
-            self.follower1.get(
-                reverse(
-                    'posts:profile_follow',
-                    kwargs={
-                        'username': self.user_follower1,
-                    }
-                )
+        count_followers = Follow.objects.count()
+        self.follower1.get(
+            reverse(
+                'posts:profile_follow',
+                kwargs={
+                    'username': self.user_follower1,
+                }
             )
-            self.assertEqual(Follow.objects.count(), count_followers)
+        )
+        self.assertEqual(Follow.objects.count(), count_followers)
