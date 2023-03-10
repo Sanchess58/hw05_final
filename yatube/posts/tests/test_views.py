@@ -59,6 +59,9 @@ class PaginatorViewsTest(TestCase):
             ): [AMOUNT_FIRST_PAGE_RECORDS, AMOUNT_NEXT_PAGE_RECORDS]
         }
 
+    def setUp(self):
+        cache.clear()
+
     def test_first_page_contains_ten_records(self):
         """Проверка, что на 1 странице 10 постов."""
         for reverse_name, leng in self.len_context.items():
