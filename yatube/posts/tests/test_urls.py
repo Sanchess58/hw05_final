@@ -49,6 +49,8 @@ class PostURLTests(TestCase):
                 HTTPStatus.OK.value,
                 HTTPStatus.FOUND.value
             ],
+            f'posts/{cls.post.pk}/comment/': HTTPStatus.FOUND.value,
+            '/follow/': HTTPStatus.OK.value,
             f'/profile/{cls.post.author}/follow/': HTTPStatus.FOUND.value,
             f'/profile/{cls.post.author}/unfollow/': HTTPStatus.FOUND.value,
         }
