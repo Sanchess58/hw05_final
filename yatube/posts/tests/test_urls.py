@@ -36,6 +36,7 @@ class PostURLTests(TestCase):
             f'/profile/{cls.post.author}/': 'posts/profile.html',
             f'/posts/{cls.post.pk}/': 'posts/post_detail.html',
             '/create/': 'posts/create_post.html',
+            '/follow/': 'posts/follow.html',
         }
         cls.status_codes = {
             '/': HTTPStatus.OK.value,
@@ -47,7 +48,9 @@ class PostURLTests(TestCase):
             f'/posts/{cls.post.pk}/edit/': [
                 HTTPStatus.OK.value,
                 HTTPStatus.FOUND.value
-            ]
+            ],
+            f'/profile/{cls.post.author}/follow/': HTTPStatus.FOUND.value,
+            f'/profile/{cls.post.author}/unfollow/': HTTPStatus.FOUND.value,
         }
 
     @classmethod

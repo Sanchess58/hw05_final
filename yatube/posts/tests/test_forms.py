@@ -14,7 +14,7 @@ TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
 
 @override_settings(MEDIA_ROOT=TEMP_MEDIA_ROOT)
-class PostTestForm(TestCase):
+class TestPostForm(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -34,11 +34,6 @@ class PostTestForm(TestCase):
             text="Текст поста такой",
             group=cls.group,
             author=cls.user_author,
-        )
-        cls.comment = Comment.objects.create(
-            text="Комментарий текст",
-            author=cls.user,
-            post=cls.post
         )
 
     @classmethod
@@ -129,6 +124,34 @@ class PostTestForm(TestCase):
                 group=form_data.get('group'),
                 image='posts/small.gif'
             ).exists()
+        )
+
+
+class TestComment(TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.user = User.objects.create_user(username='leo')
+        cls.authorized_client = Client()
+        cls.authorized_client.force_login(cls.user)
+        cls.author_client = Client()
+        cls.user_author = User.objects.create_user(username='admin2')
+        cls.author_client.force_login(cls.user_author)
+        cls.guest_client = Client()
+        cls.group = Group.objects.create(
+            title="Группа такая-то",
+            slug="takaya-to222",
+            description="Описание такое-то"
+        )
+        cls.post = Post.objects.create(
+            text="Текст поста такой",
+            group=cls.group,
+            author=cls.user_author,
+        )
+        cls.comment = Comment.objects.create(
+            text="Комментарий текст",
+            author=cls.user,
+            post=cls.post
         )
 
     def test_create_comment(self):
